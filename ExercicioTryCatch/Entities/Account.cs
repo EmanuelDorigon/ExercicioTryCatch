@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ExercicioTryCatch.Entities.Exceptions;
 
 namespace ExercicioTryCatch.Entities
 {
@@ -27,11 +28,15 @@ namespace ExercicioTryCatch.Entities
         {
             Balance += amount;
         }
-        public void Witydraw(double amount)
+        public void Withdraw(double amount)
         {
             if (amount >= WithdrawLimit) 
             {
-            throw new DomainException("")
+                throw new DomainException("The amount exceeds withdraw limit");
+            }
+            if (Balance < amount)
+            {
+                throw new DomainException("You have no balance");
             }
             Balance -= amount;
         }
